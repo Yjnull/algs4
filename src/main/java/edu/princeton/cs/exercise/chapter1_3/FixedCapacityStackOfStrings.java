@@ -3,47 +3,61 @@ package edu.princeton.cs.exercise.chapter1_3;
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 
-public class FixedCapacityStackOfStrings<Item> {
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 
-    private Item[] a;  // stack entries
-    private int N;       // size
+public class FixedCapacityStackOfStrings implements Iterable<String>{
+    private String[] a;  // holds the items
+    private int N;       // number of items in stack
 
-    public FixedCapacityStackOfStrings(int cap) {
-        a = (Item[]) new Object[cap];
+    // create an empty stack with given capacity
+    public FixedCapacityStackOfStrings(int capacity) {
+        a = new String[capacity];
+        N = 0;
     }
 
-    public boolean isEmpty() { return N == 0;}
+    public boolean isEmpty()            {  return N == 0;                    }
+    public boolean isFull()             {  return N == a.length;             }
+    public void push(String item)       {  a[N++] = item;                    }
+    public String pop()                 {  return a[--N];                    }
+    public String peek()                {  return a[N-1];                    }
+    public Iterator<String> iterator()  { return new ReverseArrayIterator(); }
 
-    public int size() {return N;}
 
-    public void push(Item item) {
-        if (N == a.length) resize(2 * a.length);
-        a[N++] = item;
+    public class ReverseArrayIterator implements Iterator<String> {
+        private int i = N-1;
+
+        public boolean hasNext() {
+            return i >= 0;
+        }
+
+        public String next() {
+            if (!hasNext()) throw new NoSuchElementException();
+            return a[i--];
+        }
+
+        public void remove() {
+            throw new UnsupportedOperationException();
+        }
     }
 
-    public Item pop() {
-        Item item = a[--N];
-        a[N] = null;
-        if (N > 0 && N == a.length / 4) resize(a.length / 2);
-        return item;
-    }
-
-    private void resize(int max) {
-        Item[] temp = (Item[]) new Object[max];
-        for (int i = 0; i < N; i++)
-            temp[i] = a[i];
-        a = temp;
-    }
 
     public static void main(String[] args) {
-        FixedCapacityStackOfStrings<String> s = new FixedCapacityStackOfStrings<>(100);
+        int max = Integer.parseInt(args[0]);
+        FixedCapacityStackOfStrings stack = new FixedCapacityStackOfStrings(max);
         while (!StdIn.isEmpty()) {
             String item = StdIn.readString();
-            if (!"-".equals(item))
-                s.push(item);
-            else if (!s.isEmpty())
-                StdOut.print(s.pop() + " ");
+            if (!item.equals("-")) stack.push(item);
+            else if (stack.isEmpty())  StdOut.println("BAD INPUT");
+            else                       StdOut.print(stack.pop() + " ");
         }
-        StdOut.println("(" + s.size() + " left on stack)");
+        StdOut.println();
+
+        // print what's left on the stack
+        StdOut.print("Left on stack: ");
+        for (String s : stack) {
+            StdOut.print(s + " ");
+        }
+        StdOut.println();
     }
 }
