@@ -13,6 +13,24 @@ public class Stack<Item> implements Iterable<Item>{
     private class Node{
         Item item;
         Node next;
+
+        Node(){}
+        Node(Node x) {
+            this.item = x.item;
+            this.next = x.next;
+        }
+    }
+
+    public Stack(){}
+
+    public Stack(Stack<Item> s) {
+        if (s.first != null) {
+            first = new Node(s.first);
+            for (Node x = first; x.next != null ; x = x.next) {
+                x.next = new Node(x.next);
+            }
+            N = s.N;
+        }
     }
 
     public boolean isEmpty() { return first == null;}

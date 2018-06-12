@@ -86,7 +86,8 @@ public class List<Item> implements Iterable<Item> {
     }
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         StringBuilder s = new StringBuilder();
         for (Item item : this)
             s.append(item).append(" ");
@@ -173,7 +174,136 @@ public class List<Item> implements Iterable<Item> {
             return null;
     }
 
-    public static void main(String[] args) {
+    /*************************************
+     * Exercise 1.3.21
+     * (Renamed from find() to contains())
+     *************************************/
+    public boolean contains(Item item)
+    {
+        Node curr = first;
+        while (curr != null && !curr.item.equals(item))
+            curr = curr.next;
+        return curr != null;
+    }
+
+    /*************************************
+     * Exercise 1.3.24
+     *************************************/
+    public void removeAfter(Node node)
+    {
+        if (node != null && node.next != null)
+        {
+            if (node.next.next == null)
+                last = node;
+            node.next = node.next.next;
+            N--;
+        }
+    }
+
+    /*************************************
+     * Exercise 1.3.25
+     *************************************/
+    public void insertAfter(Node a, Node b)
+    {
+        if (a != null && b != null)
+        {
+            if (last == a)
+                last = b;
+            b.next = a.next;
+            a.next = b;
+            N++;
+        }
+    }
+
+    /*************************************
+     * Exercise 1.3.26
+     *************************************/
+    public void remove(Item item)
+    {
+        List<Integer> idx = new List<>();
+        int i = 1;
+
+        for (Item x : this)
+        {
+            if (x.equals(item))
+                idx.prepend(i);
+            i++;
+        }
+
+        for (int k : idx)
+            delete(k);
+    }
+
+    /*************************************
+     * Exercise 1.3.27
+     * Type 'Item' must implement interface Comparable
+     *************************************/
+    public Item max(Node node)
+    {
+        if (node == null)
+            return null;
+
+        Item max = node.item;
+        Node curr = node;
+
+        while (curr.next != null)
+        {
+            curr = curr.next;
+            if (((Comparable)max).compareTo(curr.item) < 0)
+                max = curr.item;
+        }
+
+        return max;
+    }
+
+    /*************************************************
+     * Exercise 1.3.28
+     * (recursive variant of Exercise 1.3.27)
+     * Type 'Item' must implement interface Comparable
+     *************************************************/
+    public Item maxRec(Node node)
+    {
+        if (node == null) return null;
+
+        if (node.next == null)
+            return node.item;
+        else
+        {
+            Item maxTail = maxRec(node.next);
+            return ((Comparable)node.item).compareTo(maxTail) > 0 ? node.item : maxTail;
+        }
+    }
+
+    /*************************************************
+     * Exercise 1.3.30
+     *************************************************/
+    public Node reverse(Node x)
+    {
+        Node first = x;
+        Node reverse = null;
+        while (first != null)
+        {
+            Node second = first.next;
+            first.next = reverse;
+            reverse = first;
+            first = second;
+        }
+        return reverse;
+    }
+
+    public Node reverseRec(Node first)
+    {
+        if (first == null) return null;
+        if (first.next == null) return first;
+        Node second = first.next;
+        Node rest = reverseRec(second);
+        second.next = first;
+        first.next = null;
+        return rest;
+    }
+
+    public static void main(String[] args)
+    {
         List<Integer> mList = new List<>(new Integer[]{1, 2, 3});
         mList.delete(3);
         StdOut.println(mList);
