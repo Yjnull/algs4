@@ -26,7 +26,7 @@ public class ThreeSum {
     public static void main(String[] args) {
        /* In in = new In(args[0]);
         int[] a = in.readAllInts();*/
-       int N = 2000;
+       int N = 4000;
        int[] a = new int[N];
         for (int i = 0; i < N; i++) {
             a[i] = StdRandom.uniform(-1000000, 1000000);
