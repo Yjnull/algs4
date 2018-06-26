@@ -1,4 +1,4 @@
-package edu.princeton.cs.exercise.chapter2_1;
+package edu.princeton.cs.exercise.chapter2;
 
 import edu.princeton.cs.algs4.StdDraw;
 

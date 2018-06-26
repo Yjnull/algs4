@@ -1,4 +1,4 @@
-package edu.princeton.cs.exercise.chapter2_1;
+package edu.princeton.cs.exercise.chapter2;
 
 import edu.princeton.cs.algs4.*;
 import edu.princeton.cs.exercise.chapter1_4.Stopwatch;
@@ -11,10 +11,10 @@ public class SortCompare {
     {
         Stopwatch timer = new Stopwatch();
         if      (alg.equals("Insertion"))       Insertion.sort(a);
-//        else if (alg.equals("InsertionX"))      InsertionX.sort(a);
+        else if (alg.equals("InsertionX"))      InsertionX.sort(a);
 //        else if (alg.equals("BinaryInsertion")) BinaryInsertion.sort(a);
         else if (alg.equals("Selection"))       Selection.sort(a);
-        else if (alg.equals("Shell"))           Shell.sort(a);
+        else if (alg.equals("Shell"))           Shell.sort2(a);
 //        else if (alg.equals("Merge"))           Merge.sort(a);
 //        else if (alg.equals("MergeX"))          MergeX.sort(a);
 //        else if (alg.equals("MergeBU"))         MergeBU.sort(a);
@@ -43,9 +43,9 @@ public class SortCompare {
 
     public static void main(String[] args)
     {
-        String alg1 = "Shell";
+        String alg1 = "InsertionX";
         String alg2 = "Insertion";
-        int n = 1000;
+        int n = 10000;
         int t = 100;
 
         double t1 = timeRandomInput(alg1, n, t);

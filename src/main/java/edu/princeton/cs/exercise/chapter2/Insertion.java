@@ -1,4 +1,4 @@
-package edu.princeton.cs.exercise.chapter2_1;
+package edu.princeton.cs.exercise.chapter2;
 
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
@@ -29,6 +29,12 @@ public class Insertion {
      *  Helper sorting functions.
      ***************************************************************************/
     private static boolean less(Comparable v, Comparable w)
+    {
+        return v.compareTo(w) < 0;
+    }
+
+    /** 使用 静态泛型 消除警告 */
+    private static <Key extends Comparable<Key>> boolean less2(Key v, Key w)
     {
         return v.compareTo(w) < 0;
     }
