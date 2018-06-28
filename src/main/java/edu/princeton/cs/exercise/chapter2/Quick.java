@@ -2,35 +2,38 @@ package edu.princeton.cs.exercise.chapter2;
 
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
+import edu.princeton.cs.algs4.StdRandom;
 
-public class Insertion {
+public class Quick {
 
     public static void sort(Comparable[] a)
     {
-        int N = a.length;
-        for (int i = 1; i < N; i++) {
-            for (int j = i; j > 0 && less(a[j], a[j - 1]); j--)
-                exch(a, j, j - 1);
-        }
+        StdRandom.shuffle(a);
+        sort(a, 0, a.length - 1);
     }
 
-    public static void sort(Comparable[] a, int lo, int hi)
+    private static void sort(Comparable[] a, int lo, int hi)
     {
-        for (int i = lo; i < hi; i++) {
-            for (int j = i; j > lo && less(a[j], a[j - 1]); j--)
-                exch(a, j, j - 1);
-        }
+        if (hi <= lo) return;
+
+        int j = partition(a, lo, hi);
+        sort(a, lo, j - 1);
+        sort(a, j + 1, hi);
     }
 
-    public static void sort2(Comparable[] a)
+    private static int partition(Comparable[] a, int lo, int hi)
     {
-        int N = a.length, j;
-        for (int i = 1; i < N; i++) {
-            Comparable temp = a[i];
-            for (j = i; j > 0 && less(temp, a[j - 1]); j--)
-                a[j] = a[j - 1];
-            a[j] = temp;
+        int i = lo, j = hi + 1;
+        Comparable v = a[lo];
+        while (true)
+        {
+            while (less(a[++i], v)) if (i == hi) break;
+            while (less(v, a[--j])) if (j == lo) break;
+            if (i >= j) break;
+            exch(a, i, j);
         }
+        exch(a, lo, j);
+        return j;
     }
 
     /***************************************************************************
@@ -70,7 +73,8 @@ public class Insertion {
     }
 
     public static void main(String[] args) {
-        String[] a = StdIn.readAllStrings();
+        //String[] a = StdIn.readAllStrings();
+        Integer[] a = new Integer[]{10,1,2,3,4,5,6,7,8,9};
         sort(a);
         assert isSorted(a);
         show(a);

@@ -1,36 +1,32 @@
 package edu.princeton.cs.exercise.chapter2;
 
-import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
+import edu.princeton.cs.algs4.StdRandom;
 
-public class Insertion {
+public class Quick3way {
 
     public static void sort(Comparable[] a)
     {
-        int N = a.length;
-        for (int i = 1; i < N; i++) {
-            for (int j = i; j > 0 && less(a[j], a[j - 1]); j--)
-                exch(a, j, j - 1);
-        }
+        StdRandom.shuffle(a);
+        sort(a, 0, a.length - 1);
     }
 
-    public static void sort(Comparable[] a, int lo, int hi)
+    private static void sort(Comparable[] a, int lo, int hi)
     {
-        for (int i = lo; i < hi; i++) {
-            for (int j = i; j > lo && less(a[j], a[j - 1]); j--)
-                exch(a, j, j - 1);
-        }
-    }
+        if (hi <= lo) return;
 
-    public static void sort2(Comparable[] a)
-    {
-        int N = a.length, j;
-        for (int i = 1; i < N; i++) {
-            Comparable temp = a[i];
-            for (j = i; j > 0 && less(temp, a[j - 1]); j--)
-                a[j] = a[j - 1];
-            a[j] = temp;
+        int lt = lo, i = lo + 1, gt = hi;
+        Comparable v = a[lo];
+        while (i <= gt)
+        {
+            int cmp = a[i].compareTo(v);
+            if      (cmp > 0) exch(a, lt++, i++);
+            else if (cmp < 0) exch(a, i, gt--);
+            else              i++;
         }
+
+        sort(a, lo, lt - 1);
+        sort(a, gt + 1, hi);
     }
 
     /***************************************************************************
@@ -70,7 +66,8 @@ public class Insertion {
     }
 
     public static void main(String[] args) {
-        String[] a = StdIn.readAllStrings();
+        //String[] a = StdIn.readAllStrings();
+        Integer[] a = new Integer[]{10,1,2,3,4,5,6,7,8,9};
         sort(a);
         assert isSorted(a);
         show(a);
