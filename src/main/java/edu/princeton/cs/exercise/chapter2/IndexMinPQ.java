@@ -11,6 +11,8 @@ public class IndexMinPQ<Key extends Comparable<Key>> {
 
     public IndexMinPQ(int maxN)
     {
+        if (maxN < 0) throw new IllegalArgumentException();
+        n = 0;
         keys = (Key[]) new Comparable[maxN + 1];
         pq = new int[maxN + 1];
         qp = new int[maxN + 1];
@@ -35,14 +37,6 @@ public class IndexMinPQ<Key extends Comparable<Key>> {
     public Key min() {
         if (isEmpty()) throw new NoSuchElementException("Priority queue underflow");
         return keys[pq[1]];
-    }
-
-    private void resize(int capacity) {
-        Key[] temp = (Key[]) new Object[capacity];
-        for (int i = 1; i <= n; i++) {
-            temp[i] = keys[i];
-        }
-        keys = temp;
     }
 
     public void insert(int k, Key key)
