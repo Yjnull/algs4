@@ -15,9 +15,31 @@ public class SortCompare {
 //        else if (alg.equals("BinaryInsertion")) BinaryInsertion.sort(a);
         else if (alg.equals("Selection"))       Selection.sort(a);
         else if (alg.equals("Shell"))           Shell.sort2(a);
-//        else if (alg.equals("Merge"))           Merge.sort(a);
-//        else if (alg.equals("MergeX"))          MergeX.sort(a);
-//        else if (alg.equals("MergeBU"))         MergeBU.sort(a);
+        else if (alg.equals("Merge"))           Merge.sort(a);
+        else if (alg.equals("MergeX"))          MergeX.sort(a);
+        else if (alg.equals("MergeBU"))         MergeBU.sort(a);
+        else if (alg.equals("Quick"))           Quick.sort(a);
+        else if (alg.equals("Quick3way"))       Quick3way.sort(a);
+        else if (alg.equals("QuickX"))          QuickX.sort(a);
+        else if (alg.equals("QuickXX"))         QuickXX.sort(a);
+//        else if (alg.equals("Heap"))            Heap.sort(a);
+        else if (alg.equals("System"))          Arrays.sort(a);
+        else throw new IllegalArgumentException("Invalid algorithm" + alg);
+
+        return timer.elapsedTime();
+    }
+
+    public static double time2(String alg, Double[] a)
+    {
+        Stopwatch timer = new Stopwatch();
+        if      (alg.equals("Insertion"))       edu.princeton.cs.algs4.Insertion.sort(a);
+        else if (alg.equals("InsertionX"))      edu.princeton.cs.algs4.InsertionX.sort(a);
+        else if (alg.equals("BinaryInsertion")) edu.princeton.cs.algs4.BinaryInsertion.sort(a);
+        else if (alg.equals("Selection"))       edu.princeton.cs.algs4.Selection.sort(a);
+        else if (alg.equals("Shell"))           edu.princeton.cs.algs4.Shell.sort(a);
+        else if (alg.equals("Merge"))           edu.princeton.cs.algs4.Merge.sort(a);
+        else if (alg.equals("MergeX"))          edu.princeton.cs.algs4.MergeX.sort(a);
+        else if (alg.equals("MergeBU"))         edu.princeton.cs.algs4.MergeBU.sort(a);
 //        else if (alg.equals("Quick"))           Quick.sort(a);
 //        else if (alg.equals("Quick3way"))       Quick3way.sort(a);
 //        else if (alg.equals("QuickX"))          QuickX.sort(a);
@@ -43,9 +65,9 @@ public class SortCompare {
 
     public static void main(String[] args)
     {
-        String alg1 = "InsertionX";
-        String alg2 = "Insertion";
-        int n = 10000;
+        String alg1 = "QuickX";
+        String alg2 = "QuickXX";
+        int n = 1000000;
         int t = 100;
 
         double t1 = timeRandomInput(alg1, n, t);
