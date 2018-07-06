@@ -9,7 +9,10 @@ public class FrequencyCounter {
     public static void main(String[] args) {
         int minLen = Integer.parseInt(args[0]);
 
-        ST<String, Integer> st = new ST<>();
+        //ST<String, Integer> st = new ST<>();
+        RedBlackBST<String, Integer> st = new RedBlackBST<>();
+//        edu.princeton.cs.algs4.RedBlackBST<String, Integer> st = new edu.princeton.cs.algs4.RedBlackBST<>();
+//        BST<String, Integer> st = new BST<>();
 
         while (!StdIn.isEmpty()) {
             String word = StdIn.readString();
