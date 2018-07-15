@@ -22,7 +22,7 @@ public class SortCompare {
         else if (alg.equals("Quick3way"))       Quick3way.sort(a);
         else if (alg.equals("QuickX"))          QuickX.sort(a);
         else if (alg.equals("QuickXX"))         QuickXX.sort(a);
-//        else if (alg.equals("Heap"))            Heap.sort(a);
+        else if (alg.equals("Heap"))            Heap.sort(a);
         else if (alg.equals("System"))          Arrays.sort(a);
         else throw new IllegalArgumentException("Invalid algorithm" + alg);
 
@@ -43,7 +43,7 @@ public class SortCompare {
 //        else if (alg.equals("Quick"))           Quick.sort(a);
 //        else if (alg.equals("Quick3way"))       Quick3way.sort(a);
 //        else if (alg.equals("QuickX"))          QuickX.sort(a);
-//        else if (alg.equals("Heap"))            Heap.sort(a);
+        else if (alg.equals("Heap"))            edu.princeton.cs.algs4.Heap.sort(a);
         else if (alg.equals("System"))          Arrays.sort(a);
         else throw new IllegalArgumentException("Invalid algorithm" + alg);
 
@@ -66,8 +66,8 @@ public class SortCompare {
     public static void main(String[] args)
     {
         String alg1 = "QuickX";
-        String alg2 = "QuickXX";
-        int n = 1000000;
+        String alg2 = "Heap";
+        int n = 100000;
         int t = 100;
 
         double t1 = timeRandomInput(alg1, n, t);

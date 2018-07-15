@@ -71,9 +71,7 @@ public class IndexMinPQ<Key extends Comparable<Key>> {
 
     private void exch(int i, int j)
     {
-        Key t = keys[i];
-        keys[i] = keys[j];
-        keys[j] = t;
+
     }
 
     private void swim(int k)
